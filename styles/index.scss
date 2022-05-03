@@ -1,0 +1,11 @@
+@import './variables';
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: $primary_color;
+    color: $fourth_color;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
