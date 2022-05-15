@@ -10,7 +10,7 @@ export default {
     },
     emits: {
         "rerenderTodos": function() {}
-    },
+    },  
     methods: {
         setTitleData(event) {
             this.title = event.target.value

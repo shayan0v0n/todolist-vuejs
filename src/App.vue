@@ -17,7 +17,7 @@ import axios from 'axios'
             Loading,
             Error
         },
-        mounted () {
+        updated () {
             axios.get("https://todo-list-104ff-default-rtdb.firebaseio.com/todos.json")
                 .then(res => res)
                     .then(res => this.todos = res.data)
@@ -33,6 +33,13 @@ import axios from 'axios'
             },
             deleteTodoItemHandler(item) {
                 delete this.todos[item]
+            },
+            updateTodoListHandler() {
+                axios.get("https://todo-list-104ff-default-rtdb.firebaseio.com/todos.json")
+                    .then(res => res)
+                        .then(res => this.todos = res.data)
+                            .catch(err => this.error = true)
+                
             }
         }
     }
@@ -43,8 +50,15 @@ import axios from 'axios'
         <TodoForm @rerenderTodos="rerenderTodoHandler"/>
     </div>
     <div class="main-app animate__animated animate__fadeInUp">
-        <div v-if="todos" v-for="(todo, index) in todos">
-            <Todos :todoTitle="todo.title" :todoDesc="todo.description" :todos="index" @deleteTodoItem="deleteTodoItemHandler" />
+        <div v-if="todos">
+            <div v-for="(todo, index) in todos">
+                <Todos
+                 :todoTitle="todo.title"
+                 :todoDesc="todo.description"
+                 :todos="index" 
+                 @deleteTodoItem="deleteTodoItemHandler"
+                 @updateTodoList="updateTodoListHandler" />
+            </div>
         </div>
         <div v-else-if="error">
             <Error />
